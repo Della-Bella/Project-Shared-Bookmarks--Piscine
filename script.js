@@ -10,7 +10,7 @@
 import { getUserIds, getData, setData } from "./storage.js";
 
 
-//add an event listener to the bookmarkForm that listens for the submit event:
+
 
 function displayBookmarks(bookmarks) {
    const bookmarkListDiv = document.getElementById("bookmark-list");
@@ -25,31 +25,30 @@ function displayBookmarks(bookmarks) {
       const bookmarkDiv = document.createElement("div");
       bookmarkDiv.className = "bookmark-item";
 
-      // Title as clickable link
-      const titleLink = document.createElement("a");
-      titleLink.href = bookmark.url;
-      titleLink.textContent = bookmark.title;
-      titleLink.target = "_blank";
-      titleLink.rel = "noopener noreferrer"; // Security improvement
+   //Title/ URL Link
+    const titleLink = document.createElement("a");
+    titleLink.href = bookmark.url;         // Link to URL
+    titleLink.textContent = bookmark.title; // Show title only
+    titleLink.target = "_blank";          
+    titleLink.rel = "noopener noreferrer";
 
-      // Description
-      const descriptionPara = document.createElement("p");
-      descriptionPara.textContent = bookmark.description;
+    // Description
+    const descriptionPara = document.createElement("p");
+    descriptionPara.textContent = bookmark.description;
 
-      // Timestamp
-      const timestampSpan = document.createElement("span");
-      const date = new Date(Number(bookmark.createdAt));
-      timestampSpan.textContent = `Created at: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    // Timestamp
+    const timestampSpan = document.createElement("span");
+    const date = new Date(Number(bookmark.createdAt));
+    timestampSpan.textContent = `Created at: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-      // Append all elements
-      bookmarkDiv.appendChild(titleLink);
-      bookmarkDiv.appendChild(descriptionPara);
-      bookmarkDiv.appendChild(timestampSpan);
+    // Append all elements
+    bookmarkDiv.appendChild(titleLink);
+    bookmarkDiv.appendChild(descriptionPara);
+    bookmarkDiv.appendChild(timestampSpan);
 
-      bookmarkListDiv.appendChild(bookmarkDiv);
-   });
+    bookmarkListDiv.appendChild(bookmarkDiv);
+  });
 }
-
 
 function loadBookmarks(userId) {
    console.log("Loading bookmarks for user:", userId);
@@ -81,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
    const bookmarkForm = document.getElementById("bookmarkForm");
 
    bookmarkForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault(); // prevents the form's default to reload
 
       const urlInput = document.getElementById("url");
       const titleInput = document.getElementById("title");

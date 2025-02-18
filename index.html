@@ -19,18 +19,18 @@
   
 
   <form id="bookmarkForm">
-    
-    <label for="url">URL:</label>
-    <input type="text" id="url" name="url" required><br><br>
+  <label for="url">URL:</label>
+  <input type="text" id="url" name="url" placeholder="Enter bookmark URL" required><br><br>
 
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required><br><br>
+  <!-- Fixed Title as url link -->
+  <label for="title">Each bookmark's title is a link to the bookmark's URL:</label>
+  <input type="text" id="title" name="title" placeholder="Enter bookmark title" required><br><br>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" rows="4" required></textarea><br><br>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" placeholder="Enter bookmark description" rows="4" required></textarea><br><br>
 
-    <button type="submit">Add Bookmark</button>
-  </form>
+  <button type="submit">Add Bookmark</button>
+</form>
   
   <section id="bookmark-list">   
 
