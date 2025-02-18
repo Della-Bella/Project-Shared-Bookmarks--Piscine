@@ -4,12 +4,10 @@
 // Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
 // You can't open the index.html file using a file:// URL.
 
-
-
 //create cont userSelect to storage ids of each select Ussr and populate Dropdown menu for each userIds
 // DOMContentLoaded=  all HTML document has been completely loaded then javscript can aces it
 
-import { getUserIds } from "./storage.js";
+import { getUserIds, getData, setData } from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
    const userSelect = document.getElementById("user-select");
@@ -20,5 +18,105 @@ document.addEventListener("DOMContentLoaded", function () {
       option.value = userId;
       option.textContent = userId;
       userSelect.appendChild(option);
+   });
+});
+
+//stop pages from reload wnhe add bookmark""
+
+const bookmarkForm = document.getElementById("bookmarkForm");
+
+//add an event listener to the bookmarkForm that listens for the submit event:
+
+function displayBookmarks(bookmarks) {
+   const bookmarkListDiv = document.getElementById("bookmark-list");
+   bookmarkListDiv.innerHTML = "";
+
+   if (!bookmarks || bookmarks.length === 0) {
+      bookmarkListDiv.textContent = "No bookmarks found for this user.";
+      return;
+   }
+
+   for (let i = bookmarks.length - 1; i >= 0; i--) {
+      const bookmark = bookmarks[i];
+
+      const bookmarkDiv = document.createElement("div");
+
+      const titleLink = document.createElement("a");
+      titleLink.href = bookmark.url;
+      titleLink.textContent = bookmark.title;
+      titleLink.target = "_blank";
+      bookmarkDiv.appendChild(titleLink);
+
+      const descriptionPara = document.createElement("p");
+      descriptionPara.textContent = bookmark.description;
+      bookmarkDiv.appendChild(descriptionPara);
+
+      const timestampSpan = document.createElement("span");
+      const date = new Date(bookmark.createdAt);
+      timestampSpan.textContent = `Created at: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      bookmarkDiv.appendChild(bookmarkDiv);
+
+      bookmarkListDiv.appendChild(bookmarkDiv);
+   }
+}
+
+function loadBookmarks(userId) {
+   console.log("Loading bookmarks for user:", userId);
+   const bookmarks = getData(userId);
+   console.log("Bookmarks:", bookmarks);
+   displayBookmarks(bookmarks);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+   const userSelect = document.getElementById("user-select");
+
+   const userIds = getUserIds();
+   userIds.forEach((userId) => {
+      const option = document.createElement("option");
+      option.value = userId;
+      option.textContent = userId;
+      userSelect.appendChild(option);
+   });
+
+   if (userIds.length > 0) {
+      loadBookmarks(userIds[0]);
+   }
+
+   userSelect.addEventListener("change", function () {
+      const selectedUserId = userSelect.value;
+      loadBookmarks(selectedUserId);
+   });
+
+   const bookmarkForm = document.getElementById("bookmarkForm");
+
+   bookmarkForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const urlInput = document.getElementById("url");
+      const titleInput = document.getElementById("title");
+      const descriptionInput = document.getElementById("description");
+
+      const url = urlInput.value;
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+
+      const newBookmark = {
+         url: url,
+         title: title,
+         description: description,
+         createdAt: Date.now(),
+      };
+
+      const selectedUserId = userSelect.value;
+
+      const existingBookmarks = getData(selectedUserId) || [];
+      existingBookmarks.unshift(newBookmark); // Add to the beginning
+
+      setData(selectedUserId, existingBookmarks);
+      loadBookmarks(selectedUserId);
+
+      urlInput.value = "";
+      titleInput.value = "";
+      descriptionInput.value = "";
    });
 });
