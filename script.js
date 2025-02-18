@@ -14,36 +14,42 @@ import { getUserIds, getData, setData } from "./storage.js";
 
 function displayBookmarks(bookmarks) {
    const bookmarkListDiv = document.getElementById("bookmark-list");
-   bookmarkListDiv.innerHTML = "";// CLEAR EXISTENTING CONTENT IF ANY
+   bookmarkListDiv.innerHTML = ""; // Clear existing content
 
    if (!bookmarks || bookmarks.length === 0) {
       bookmarkListDiv.textContent = "No bookmarks found for this user.";
       return;
    }
 
-   for (let i = bookmarks.length - 1; i >= 0; i--) {
-      const bookmark = bookmarks[i];
+   bookmarks.forEach((bookmark) => {
+      const bookmarkDiv = document.createElement("div");
+      bookmarkDiv.className = "bookmark-item";
 
-      const bookmarkDiv = document.createElement("div"); //CREATE DIV FOR THE CONTENT
-
-      const titleLink = document.createElement("a"); // CREATE THE TITLE WITH A LINK
+      // Title as clickable link
+      const titleLink = document.createElement("a");
       titleLink.href = bookmark.url;
       titleLink.textContent = bookmark.title;
       titleLink.target = "_blank";
-      bookmarkDiv.appendChild(titleLink);
+      titleLink.rel = "noopener noreferrer"; // Security improvement
 
-      const descriptionPara = document.createElement("p"); // CRETE P FOR DESCRIPTION
+      // Description
+      const descriptionPara = document.createElement("p");
       descriptionPara.textContent = bookmark.description;
-      bookmarkDiv.appendChild(descriptionPara);
 
-      const timestampSpan = document.createElement("span"); // create date
-      const date = new Date(Number(bookmark.createdAt)); //updated to numnber
+      // Timestamp
+      const timestampSpan = document.createElement("span");
+      const date = new Date(Number(bookmark.createdAt));
       timestampSpan.textContent = `Created at: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+      // Append all elements
+      bookmarkDiv.appendChild(titleLink);
+      bookmarkDiv.appendChild(descriptionPara);
       bookmarkDiv.appendChild(timestampSpan);
 
-      bookmarkListDiv.appendChild(bookmarkDiv); //fill the content div
-   }
+      bookmarkListDiv.appendChild(bookmarkDiv);
+   });
 }
+
 
 function loadBookmarks(userId) {
    console.log("Loading bookmarks for user:", userId);
