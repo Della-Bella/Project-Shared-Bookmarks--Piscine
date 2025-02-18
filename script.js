@@ -9,9 +9,6 @@
 
 import { getUserIds, getData, setData } from "./storage.js";
 
-
-
-
 function displayBookmarks(bookmarks) {
    const bookmarkListDiv = document.getElementById("bookmark-list");
    bookmarkListDiv.innerHTML = ""; // Clear existing content
@@ -50,7 +47,7 @@ function displayBookmarks(bookmarks) {
   });
 }
 
-function loadBookmarks(userId) {
+export function loadBookmarks(userId) {
    console.log("Loading bookmarks for user:", userId);
    const bookmarks = getData(userId);
    console.log("Bookmarks:", bookmarks);
