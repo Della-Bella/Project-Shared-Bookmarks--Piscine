@@ -45,20 +45,6 @@ function displayBookmarks(bookmarks) {
    }
 }
 
-//USER DATE WILL SHOW HERE// CREATE ALSO USED TEXT ON DROPDONWMENU
-document.addEventListener("DOMContentLoaded", function () {
-   const userSelect = document.getElementById("user-select");
-   const userIds = getUserIds();
-
-   userIds.forEach((userId) => {
-      const option = document.createElement("option");
-      option.value = userId;
-      option.textContent = userId;
-      userSelect.appendChild(option);
-   });
-});
-
-
 function loadBookmarks(userId) {
    console.log("Loading bookmarks for user:", userId);
    const bookmarks = getData(userId);
