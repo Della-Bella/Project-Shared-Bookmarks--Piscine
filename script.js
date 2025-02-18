@@ -29,7 +29,7 @@ const bookmarkForm = document.getElementById("bookmarkForm");
 
 function displayBookmarks(bookmarks) {
    const bookmarkListDiv = document.getElementById("bookmark-list");
-   bookmarkListDiv.innerHTML = "";
+   bookmarkListDiv.innerHTML = ""; //clear if there is something before 
 
    if (!bookmarks || bookmarks.length === 0) {
       bookmarkListDiv.textContent = "No bookmarks found for this user.";
@@ -39,35 +39,35 @@ function displayBookmarks(bookmarks) {
    for (let i = bookmarks.length - 1; i >= 0; i--) {
       const bookmark = bookmarks[i];
 
-      const bookmarkDiv = document.createElement("div");
+      const bookmarkDiv = document.createElement("div"); //create "box"for the content book
 
-      const titleLink = document.createElement("a");
+      const titleLink = document.createElement("a"); //create the link for the title
       titleLink.href = bookmark.url;
       titleLink.textContent = bookmark.title;
       titleLink.target = "_blank";
       bookmarkDiv.appendChild(titleLink);
 
-      const descriptionPara = document.createElement("p");
+      const descriptionPara = document.createElement("p"); //creates description for the book
       descriptionPara.textContent = bookmark.description;
       bookmarkDiv.appendChild(descriptionPara);
 
-      const timestampSpan = document.createElement("span");
+      const timestampSpan = document.createElement("span"); // create date 
       const date = new Date(bookmark.createdAt);
       timestampSpan.textContent = `Created at: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
       bookmarkDiv.appendChild(bookmarkDiv);
 
-      bookmarkListDiv.appendChild(bookmarkDiv);
+      bookmarkListDiv.appendChild(bookmarkDiv); //fill the content div
    }
 }
-
+// if there date for the user it will show with this function: 
 function loadBookmarks(userId) {
    console.log("Loading bookmarks for user:", userId);
    const bookmarks = getData(userId);
    console.log("Bookmarks:", bookmarks);
    displayBookmarks(bookmarks);
 }
-
-document.addEventListener("DOMContentLoaded", function () {
+//dom loaded stop reload the page, get the users ids creates a text option for each user.
+document.addEventListener("DOMContentLoaded", function () { 
    const userSelect = document.getElementById("user-select");
 
    const userIds = getUserIds();
@@ -89,8 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
    const bookmarkForm = document.getElementById("bookmarkForm");
 
+
+   // assign/ submit the book detail created for the select user:
+   
    bookmarkForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault(); // /stop browser to reload page ever time user clicks the submit button
 
       const urlInput = document.getElementById("url");
       const titleInput = document.getElementById("title");
