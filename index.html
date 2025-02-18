@@ -1,44 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-  <title>Bookmark Project</title>
-</head>
-<body>
-  <h1>Shared Bookmarks</h1>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="style.css" />
+      <title>Bookmark Project</title>
+   </head>
+   <body>
+      <h1>Shared Bookmarks</h1>
 
-  <div class="container-book">
+      <div class="container-book">
+         <label for="user-select">Select User:</label>
+         <select id="user-select" name="user-select">
+            <!-- Users Options  -->
+         </select>
+      </div>
 
-        <label for="user-select">Select User:</label>
-        <select id="user-select" name="user-select">
-   <!-- Users Options  -->
- </select>
-  </div>
-  
+      <form id="bookmarkForm">
+         <label for="url">URL:</label>
+         <input
+            type="url"
+            id="url"
+            name="url"
+            placeholder="Enter a valid bookmark URL"
+            required
+         /><br /><br />
 
-  <form id="bookmarkForm">
-<label for="url">URL:</label>
-<input type="url" id="url" name="url" placeholder="Enter bookmark URL" required><br><br>
+         <!-- Fixed Title as url link -->
+         <label for="title"
+            >Each bookmark's title is a link to the bookmark's URL:</label
+         >
+         <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter bookmark title"
+            required
+         /><br /><br />
 
+         <label for="description">Description:</label>
+         <textarea
+            id="description"
+            name="description"
+            placeholder="Enter bookmark description"
+            rows="4"
+            required
+         ></textarea
+         ><br /><br />
 
-  <!-- Fixed Title as url link -->
-  <label for="title">Each bookmark's title is a link to the bookmark's URL:</label>
-  <input type="text" id="title" name="title" placeholder="Enter bookmark title" required><br><br>
+         <button type="submit">Add Bookmark</button>
+      </form>
 
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" placeholder="Enter bookmark description" rows="4" required></textarea><br><br>
+      <section id="bookmark-list">
+         <!-- Bookmarks  -->
+      </section>
 
-  <button type="submit">Add Bookmark</button>
-</form>
-  
-  <section id="bookmark-list">   
-
-    <!-- Bookmarks  -->
-  </section>
-
- <script type="module" src="script.js"></script>
-
-</body>
+      <script type="module" src="script.js"></script>
+   </body>
 </html>
