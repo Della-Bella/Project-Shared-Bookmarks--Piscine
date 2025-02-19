@@ -9,7 +9,7 @@
 
 import { getUserIds, getData, setData } from "./storage.js";
 
-function displayBookmarks(bookmarks) {
+export function displayBookmarks(bookmarks) {
    const bookmarkListDiv = document.getElementById("bookmark-list");
    bookmarkListDiv.innerHTML = ""; // Clear existing content
 
