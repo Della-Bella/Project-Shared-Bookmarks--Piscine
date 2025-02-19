@@ -47,6 +47,14 @@ textarea {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+#url {
+   width: 100%; 
+   min-width: 300px; 
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box; 
+}
 
 button[type="submit"] {
     background-color: #4CAF50;
