@@ -48,6 +48,15 @@ textarea {
     box-sizing: border-box;
 }
 
+#url {
+   width: calc(100% - 20px); 
+   min-width: 300px; 
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+}
+
 button[type="submit"] {
     background-color: #4CAF50;
     color: rgb(28, 28, 28);
@@ -74,7 +83,7 @@ button[type="submit"]:hover {
 
 #bookmark-list a {
     font-weight: bold;
-    color: blue;
+    color: rgb(255, 0, 136);
     text-decoration: none;
     font-style: italic;
     font-weight: lighter;
