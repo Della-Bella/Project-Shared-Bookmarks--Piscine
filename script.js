@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         descriptionInput.value = "";
     });
 
-    // Add keypress listener for Enter key submission to Description input
+    // Implementing Accessibility for Enter key submission to Description input
     descriptionInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") { 
             event.preventDefault(); 
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-      // Add keypress listener for Enter key submission to Title input
+      // Implementing Accessibility for Enter key submission to Title input
       titleInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") { 
             event.preventDefault(); 
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-       // Add keypress listener for Enter key submission to URL input
+       // Implementing Accessibility for Enter key submission to URL input
        urlInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") { 
             event.preventDefault(); 
