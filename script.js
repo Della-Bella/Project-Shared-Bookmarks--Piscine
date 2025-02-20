@@ -76,34 +76,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
    const bookmarkForm = document.getElementById("bookmarkForm");
 
-   bookmarkForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // prevents the form's default to reload
+    // for acessibilit submition = get reference to input elements *outside* of the submit listener
+    const urlInput = document.getElementById("url");
+    const titleInput = document.getElementById("title");
+    const descriptionInput = document.getElementById("description");
 
-      const urlInput = document.getElementById("url");
-      const titleInput = document.getElementById("title");
-      const descriptionInput = document.getElementById("description");
 
-      const url = urlInput.value;
-      const title = titleInput.value;
-      const description = descriptionInput.value;
+    bookmarkForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // prevents the form's default to reload
 
-      const newBookmark = {
-         url: url,
-         title: title,
-         description: description,
-         createdAt: Number(Date.now()), //convert to number
-      };
+        const url = urlInput.value;
+        const title = titleInput.value;
+        const description = descriptionInput.value;
 
-      const selectedUserId = userSelect.value;
+        const newBookmark = {
+            url: url,
+            title: title,
+            description: description,
+            createdAt: Number(Date.now()), //convert to number
+        };
 
-      const existingBookmarks = getData(selectedUserId) || [];
-      existingBookmarks.unshift(newBookmark); // Add to the beginning
+        const selectedUserId = userSelect.value;
 
-      setData(selectedUserId, existingBookmarks);
-      loadBookmarks(selectedUserId);
+        const existingBookmarks = getData(selectedUserId) || [];
+        existingBookmarks.unshift(newBookmark); // Add to the beginning
 
-      urlInput.value = "";
-      titleInput.value = "";
-      descriptionInput.value = "";
-   });
+        setData(selectedUserId, existingBookmarks);
+        loadBookmarks(selectedUserId);
+
+        urlInput.value = "";
+        titleInput.value = "";
+        descriptionInput.value = "";
+    });
+
+    // Add keypress listener for Enter key submission to Description input
+    descriptionInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") { 
+            event.preventDefault(); 
+            bookmarkForm.dispatchEvent(new Event('submit')); 
+        }
+    });
+
+      // Add keypress listener for Enter key submission to Title input
+      titleInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") { 
+            event.preventDefault(); 
+            bookmarkForm.dispatchEvent(new Event('submit')); 
+        }
+    });
+
+       // Add keypress listener for Enter key submission to URL input
+       urlInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") { 
+            event.preventDefault(); 
+            bookmarkForm.dispatchEvent(new Event('submit')); 
+        }
+    });
 });
